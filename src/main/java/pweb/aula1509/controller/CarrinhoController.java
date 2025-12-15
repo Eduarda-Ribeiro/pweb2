@@ -71,17 +71,20 @@ public class CarrinhoController {
         Pessoa cliente = clienteRepository.buscarClientePorId(clienteId);
 
         if (clienteId == null) {
-            redirectAttributes.addFlashAttribute(
-                    "erroCliente",
-                    "Selecione um cliente para finalizar a venda"
-            );
+            redirectAttributes.addFlashAttribute("erroCliente", "Selecione um cliente para finalizar a venda");
             return new ModelAndView("redirect:/carrinho/view");
         }
-        
+
         Venda v = new Venda();
         v.setCliente(cliente);
         v.setData(LocalDateTime.now());
         v.adicionarItens(carrinho);
+
+        if (carrinho.isEmpty()) {
+            redirectAttributes.addFlashAttribute("erroCarrinho", "Carrinho não pode ser vazio!");
+            return new ModelAndView("redirect:/carrinho/view");
+        }
+        
         vendaRepository.salvar(v);
         carrinho.clear();
         return new ModelAndView("redirect:/carrinho/view");
