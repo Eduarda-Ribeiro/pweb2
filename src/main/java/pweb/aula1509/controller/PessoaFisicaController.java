@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pweb.aula1509.model.entity.PessoaFisica;
 import pweb.aula1509.model.repository.PessoaFisicaRepository;
 
@@ -28,11 +29,12 @@ public class PessoaFisicaController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(@Valid PessoaFisica pessoaFisica, BindingResult result) {
+    public ModelAndView save(@Valid PessoaFisica pessoaFisica, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return new ModelAndView("pessoaFisica/formPessoaFisica");
         }
         pessoaFisicaRepository.save(pessoaFisica);
+        redirectAttributes.addFlashAttribute("sucesso", "Pessoa Fisica salva com sucesso!");
         return new ModelAndView("redirect:/venda/list");
     }
 }

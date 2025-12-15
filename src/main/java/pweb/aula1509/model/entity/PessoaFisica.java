@@ -2,6 +2,7 @@ package pweb.aula1509.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,8 @@ public class PessoaFisica extends Pessoa implements Serializable {
 
     @NotBlank
     private String nome;
+    @NotBlank
+    @CPF
     private String cpf;
 
     @Override

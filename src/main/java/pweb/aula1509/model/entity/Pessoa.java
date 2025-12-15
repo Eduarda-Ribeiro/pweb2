@@ -1,6 +1,8 @@
 package pweb.aula1509.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
@@ -14,7 +16,10 @@ public abstract class Pessoa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String email, telefone;
+    @NotBlank
+    @Email
+    private String email;
+    private String telefone;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Venda> vendas = new ArrayList<>();

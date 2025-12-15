@@ -1,43 +1,50 @@
-
 <header class="container" th:fragment="header">
 
-    <nav class="navbar navbar-light" style="background-color: #c0a0c3;">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6f42c1;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">PWEB2</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" th:href="@{/produtos/list}">PWEB2</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarMenu" aria-controls="navbarMenu"
+                    aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarMenu">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- Home -->
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" th:href="@{/produtos/list}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
+                    <!-- Formulários -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="formsDropdown"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Formulários
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Pessoa Física</a></li>
-                            <li><a class="dropdown-item" href="#">Pessoa Jurídica</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="formsDropdown">
+                            <li><a class="dropdown-item" th:href="@{/pessoaFisica/formPessoaFisica}">Pessoa Física</a></li>
+                            <li><a class="dropdown-item" th:href="@{/pessoaJuridica/formPessoaJuridica}">Pessoa Jurídica</a></li>
                         </ul>
                     </li>
+                    <!-- Listas -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="listasDropdown"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Listas
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="listasDropdown">
+                            <li><a class="dropdown-item" th:href="@{/produtos/list}">Produtos</a></li>
+                            <li><a class="dropdown-item" th:href="@{/clientes/list}">Clientes</a></li>
+                            <li><a class="dropdown-item" th:href="@{/venda/list}">Vendas</a></li>
+                        </ul>
+                    </li>
+                    <!-- Carrinho -->
                     <li class="nav-item">
-                        <a class="nav-link disabled">Vendas</a>
+                        <a class="nav-link" th:href="@{/carrinho/view}">
+                            🛒 Carrinho
+                        </a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Busque aqui" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Busque aqui</button>
-                </form>
             </div>
         </div>
     </nav>
-
 </header>
-
-

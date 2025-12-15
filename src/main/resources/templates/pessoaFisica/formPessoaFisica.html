@@ -11,20 +11,23 @@
             <form th:action="@{/pessoaFisica/save}" th:object="${pessoaFisica}" method="post" class="row g-3">
                 <input type="hidden" th:field="*{id}">
                 <div class="col-md-6">
-                    <label class="form-label">Nome</label>
-                    <input class="form-control" type="text" th:field="*{nome}" placeholder="Nome">
+                    <label class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome</label>
+                    <input class="form-control" type="text" th:field="*{nome}" th:errorclass="is-invalid" placeholder="Nome">
+                    <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">CPF</label>
-                    <input class="form-control" type="text" th:field="*{cpf}" placeholder="CPF">
+                    <label class="invalid-feedback" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}">CPF</label>
+                    <input class="form-control" type="text" th:field="*{cpf}" th:errorclass="is-invalid" placeholder="CPF">
+                    <div class="text-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></div>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Telefone</label>
+                    <!--<label class="form-label">Telefone</label>-->
                     <input class="form-control" type="text" th:field="*{telefone}" placeholder="Telefone">
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Email</label>
-                    <input class="form-control" type="email" th:field="*{email}" placeholder="Email">
+                    <label class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email</label>
+                    <input class="form-control" type="text" th:field="*{email}" th:errorclass="is-invalid" placeholder="Email">
+                    <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                 </div>
                 <div class="col-12 mt-3">
                     <button class="btn btn-outline-secondary w-100" type="submit">Salvar</button>
