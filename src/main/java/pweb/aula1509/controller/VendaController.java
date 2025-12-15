@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import pweb.aula1509.model.entity.ItemVenda;
+import pweb.aula1509.model.entity.Produto;
 import pweb.aula1509.model.entity.Venda;
+import pweb.aula1509.model.repository.ClienteRepository;
 import pweb.aula1509.model.repository.ProdutoRepository;
 import pweb.aula1509.model.repository.VendaRepository;
 
@@ -23,13 +23,13 @@ public class VendaController {
 
     @Autowired //cria uma instancia quando necessário
     VendaRepository vendaRepository;
+    @Autowired
+    private ProdutoRepository produtoRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
 
-    /*
-    @GetMapping("/list")
-    public ModelAndView list(ModelMap model) {
-        model.addAttribute("lista_vendas_bd", vendaRepository.vendas());
-        return new ModelAndView("venda/list");
-    }*/
+    @Autowired
+    Venda venda;
 
     @GetMapping("/detail/{id}")
     public ModelAndView detail(@PathVariable("id") Long id, ModelMap model) {
@@ -46,4 +46,13 @@ public class VendaController {
         }
         return new ModelAndView("venda/list");
     }
+
+    @PostMapping("/adicionar")
+    public ModelAndView adicionarItem(@RequestParam Long produtoId, @RequestParam Integer quantidade, ModelMap model) {
+        Produto produto = produtoRepository.buscarProdutoPorID(produtoId);
+        ItemVenda item = new ItemVenda(produto, quantidade);
+        venda.getItens().add(item);
+        return new ModelAndView("venda/view", model);
+    }
+
 }

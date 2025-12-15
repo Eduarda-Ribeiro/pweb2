@@ -2,7 +2,6 @@ package pweb.aula1509.controller;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -84,7 +83,7 @@ public class CarrinhoController {
             redirectAttributes.addFlashAttribute("erroCarrinho", "Carrinho não pode ser vazio!");
             return new ModelAndView("redirect:/carrinho/view");
         }
-        
+
         vendaRepository.salvar(v);
         carrinho.clear();
         return new ModelAndView("redirect:/carrinho/view");
