@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pweb.aula1509.model.entity.ItemVenda;
 import pweb.aula1509.model.entity.Pessoa;
 import pweb.aula1509.model.entity.Produto;
@@ -66,13 +67,24 @@ public class CarrinhoController {
     }
 
     @PostMapping("/finalizar")
-    public ModelAndView finalizarVenda(@RequestParam Long clienteId, @ModelAttribute("carrinho") List<ItemVenda> carrinho) {
+    public ModelAndView finalizarVenda(@RequestParam Long clienteId, @ModelAttribute("carrinho") List<ItemVenda> carrinho, RedirectAttributes redirectAttributes) {
         Pessoa cliente = clienteRepository.buscarClientePorId(clienteId);
+
+        if (clienteId == null) {
+            redirectAttributes.addFlashAttribute("erroCliente", "Selecione um cliente para finalizar a venda");
+            return new ModelAndView("redirect:/carrinho/view");
+        }
 
         Venda v = new Venda();
         v.setCliente(cliente);
         v.setData(LocalDateTime.now());
         v.adicionarItens(carrinho);
+
+        if (carrinho.isEmpty()) {
+            redirectAttributes.addFlashAttribute("erroCarrinho", "Carrinho não pode ser vazio!");
+            return new ModelAndView("redirect:/carrinho/view");
+        }
+        
         vendaRepository.salvar(v);
         carrinho.clear();
         return new ModelAndView("redirect:/carrinho/view");

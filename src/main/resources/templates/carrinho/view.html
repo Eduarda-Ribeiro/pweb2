@@ -55,14 +55,15 @@
 
             <form th:action="@{/carrinho/finalizar}" method="post" class="mt-4">
                 <label for="cliente" class="form-label fw-bold">Selecione o Cliente:</label>
-                <select name="clienteId" id="cliente" class="form-select" required>
+                <select name="clienteId" id="cliente" class="form-control" required>
                     <option value="">-- Escolha --</option>
                     <option th:each="c : ${clientes}"
                             th:value="${c.id}"
                             th:text="${c.nome}">
                     </option>
                 </select>
-
+                <div th:if="${erroCarrinho}" class="alert alert-warning"><span th:text="${erroCarrinho}"></span></div>
+                <div th:if="${erroCliente}" class="alert alert-danger"><span th:text="${erroCliente}"></span></div>
                 <div class="text-end">
                     <button class="btn btn-success mt-3 px-4" type="submit"><i class="bi bi-check2-circle"></i> Finalizar Venda</button>
                 </div>
