@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main})}">
+<head th:replace="~{fragments/head :: head(~{}, ~{::title})}">
+    <title>Cadastro Pessoa Jurídica</title>
+</head>
+<body>
+    <main class="container mt-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="mb-4">Cadastro de Pessoa Jurídica</h3>
+                <form class="row g-3" th:action="@{/pessoaJuridica/save}" th:object="${pessoaJuridica}" method="post">
+                    <input type="hidden" th:field="*{id}">
+                    <div class="col-md-6">
+                        <label class="form-label">Razão Social</label>
+                        <input class="form-control" type="text" th:field="*{razaoSocial}" placeholder="Razão Social">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">CNPJ</label>
+                        <input class="form-control" type="text" th:field="*{cnpj}" placeholder="CNPJ">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Telefone</label>
+                        <input class="form-control" type="text" th:field="*{telefone}" placeholder="Telefone">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Email</label>
+                        <input class="form-control" type="text" th:field="*{email}" placeholder="Email">
+                    </div>
+                    <div class="col-12 mt-3">
+                        <input class="btn btn-outline-secondary w-100" type="submit" value="Enviar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

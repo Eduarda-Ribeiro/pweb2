@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main})}">
+<head th:replace="~{fragments/head :: head(~{}, ~{::title})}">
+    <title>Detalhes da Venda</title>
+</head>
+<body>
+<main class="container mt-4">
+
+    <!-- Card com os dados do cliente -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h3 class="mb-3" th:text="'Cliente: ' + ${cliente.getNome()}"></h3>
+
+            <form method="get" th:action="@{'/clientes/detail/' + ${cliente.id}}" class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Filtrar vendas por data:</label>
+                    <input type="datetime-local" name="data" th:value="${param.data}" class="form-control">
+                </div>
+
+                <div class="col-md-3 d-flex align-items-end">
+                    <input class="btn btn-outline-secondary w-100" type="submit" value="Enviar">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Card com tabela de vendas -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <h4 class="mb-3">Vendas Registradas</h4>
+
+            <!-- RESPONSIVE TABLE -->
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>ID Venda</th>
+                        <th>Data</th>
+                        <th>Total</th>
+                        <th>Ação</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="v : ${vendas}">
+                        <td th:text="${v.id}"></td>
+                        <td th:text="${#temporals.format(v.data, 'dd/MM/yyyy HH:mm')}"></td>
+                        <td th:text="${v.total()}"></td>
+                        <td>
+                            <a th:href="@{'/venda/detail/' + ${v.id}}"
+                               class="btn btn-outline-secondary btn-sm">
+                                Detalhes
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+</body>
+</html>

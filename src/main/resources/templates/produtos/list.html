@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main})}">
+<head th:replace="~{fragments/head :: head(~{}, ~{::title})}">
+    <title>Lista de Produtos</title>
+</head>
+<body>
+
+<main class="container mt-4">
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h4 class="mb-3">Filtrar Produtos</h4>
+            <form th:action="@{/produtos/list}" method="get" class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Nome do Produto:</label>
+                    <input type="text" name="descricao" class="form-control" th:value="${descricao}">
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button class="btn btn-outline-secondary w-100" type="submit">Filtrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="mb-3">Produtos Disponíveis</h4>
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Adicionar ao Carrinho</th>
+                </tr>
+                </thead>
+                <tr th:each="p : ${lista_produtos_bd}">
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${p.descricao}"></td>
+                    <td>R$ <span th:text="${p.valor}"></span></td>
+                    <td style="width: 250px;">
+                        <form th:action="@{/carrinho/adicionar}" method="post" class="d-flex gap-2">
+                            <input type="hidden" name="produtoId" th:value="${p.id}">
+                            <input type="number" name="quantidade" value="1" min="1" class="form-control" style="max-width: 80px;">
+                            <button type="submit" class="btn btn-outline-secondary">Adicionar</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

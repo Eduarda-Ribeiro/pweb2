@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main})}">
+<head th:replace="~{fragments/head :: head(~{}, ~{::title})}">
+    <title>Cadastro Pessoa Física</title>
+</head>
+<body>
+<main class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="mb-4">Cadastro de Pessoa Física</h3>
+            <form th:action="@{/pessoaFisica/save}" th:object="${pessoaFisica}" method="post" class="row g-3">
+                <input type="hidden" th:field="*{id}">
+                <div class="col-md-6">
+                    <label class="form-label">Nome</label>
+                    <input class="form-control" type="text" th:field="*{nome}" placeholder="Nome">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">CPF</label>
+                    <input class="form-control" type="text" th:field="*{cpf}" placeholder="CPF">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Telefone</label>
+                    <input class="form-control" type="text" th:field="*{telefone}" placeholder="Telefone">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input class="form-control" type="email" th:field="*{email}" placeholder="Email">
+                </div>
+                <div class="col-12 mt-3">
+                    <button class="btn btn-outline-secondary w-100" type="submit">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>
