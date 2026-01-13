@@ -23,13 +23,12 @@ public class ProdutoController {
     private ProdutoRepository produtoRepository;
 
     @GetMapping("/list")
-    public ModelAndView list(@RequestParam(required = false) String descricao, ModelMap model, @ModelAttribute("carrinho") List<ItemVenda> carrinho) {
+    public ModelAndView list(@RequestParam(required = false) String descricao, ModelMap model) {
         if (descricao != null) {
             model.addAttribute("lista_produtos_bd", produtoRepository.buscarProdutoPorNome(descricao));
         } else {
             model.addAttribute("lista_produtos_bd", produtoRepository.produtos());
         }
-        //model.addAttribute("quantidade_produtos", carrinho.size());
         return new ModelAndView("produtos/list");
     }
 }

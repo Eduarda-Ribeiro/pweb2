@@ -29,7 +29,7 @@
                         <td class="text-end">R$ <span th:text="${item.produto.valor}"></span></td>
                         <td class="text-end">R$ <span th:text="${item.subTotal()}"></span></td>
                         <td class="text-center">
-                            <form th:action="@{/carrinho/remover}" method="post" class="d-inline">
+                            <form th:action="@{/venda/remover}" method="post" class="d-inline">
                                 <input type="hidden" name="index" th:value="${iter.index}">
                                 <button class="btn btn-sm btn-danger" type="submit">
                                     <i class="bi bi-trash"></i> Remover
@@ -53,7 +53,7 @@
 
             <hr>
 
-            <form th:action="@{/carrinho/finalizar}" method="post" class="mt-4">
+            <form th:action="@{/venda/finalizar}" method="post" class="mt-4">
                 <label for="cliente" class="form-label fw-bold">Selecione o Cliente:</label>
                 <select name="clienteId" id="cliente" class="form-control">
                     <option value="">-- Escolha --</option>

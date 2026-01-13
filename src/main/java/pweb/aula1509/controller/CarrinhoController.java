@@ -1,5 +1,6 @@
 package pweb.aula1509.controller;
 
+/*
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,3 +91,4 @@ public class CarrinhoController {
     }
 
 }
+*/
