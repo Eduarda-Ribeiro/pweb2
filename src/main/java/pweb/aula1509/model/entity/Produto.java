@@ -15,9 +15,19 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //pro id gerar automaticamente, autoincremento
     private Long id;
 
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+
     private String descricao;
 
     private BigDecimal valor;
+
+    private String imagem;
 
     public Long getId() {
         return id;

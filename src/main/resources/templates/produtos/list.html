@@ -34,6 +34,7 @@
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
                 <tr>
+                    <th>Imagem</th>
                     <th>Id</th>
                     <th>Descrição</th>
                     <th>Valor</th>
@@ -41,6 +42,12 @@
                 </tr>
                 </thead>
                 <tr th:each="p : ${lista_produtos_bd}">
+                    <td style="width: 150px;">
+                        <img th:src="@{${p.imagem}}"
+                             class="img-fluid rounded"
+                             style="max-height: 100px;"
+                             alt="Imagem do produto">
+                    </td>
                     <td th:text="${p.id}"></td>
                     <td th:text="${p.descricao}"></td>
                     <td>R$ <span th:text="${p.valor}"></span></td>
