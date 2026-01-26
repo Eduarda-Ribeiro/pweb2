@@ -31,4 +31,5 @@ public class ProdutoController {
         }
         return new ModelAndView("produtos/list");
     }
+
 }

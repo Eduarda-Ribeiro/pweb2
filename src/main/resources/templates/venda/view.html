@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main})}">
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main})}" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="~{fragments/head :: head(~{}, ~{::title})}">
     <title>Carrinho de Compras</title>
 </head>
 <body>
 <main class="container mt-4">
+
+    <h2>Olá <strong sec:authentication="name"></strong></h2><br>
 
     <div class="card shadow-sm">
         <div class="card-header bg-secundary text-black">
@@ -17,6 +19,7 @@
                     <thead class="table-light">
                     <tr>
                         <th>Produto</th>
+                        <th class="text-center">Descrição</th>
                         <th class="text-center">Qtd</th>
                         <th class="text-end">Preço</th>
                         <th class="text-end">Subtotal</th>
@@ -24,7 +27,13 @@
                     </tr>
                     </thead>
                     <tr th:each="item, iter : ${itens}">
-                        <td th:text="${item.produto.descricao}"></td>
+                        <td style="width: 100px;">
+                            <img th:src="@{${item.produto.imagem}}"
+                                 class="img-fluid rounded"
+                                 style="max-height: 100px;"
+                                 alt="Imagem do produto">
+                        </td>
+                        <td class="text-center" th:text="${item.produto.descricao}"></td>
                         <td class="text-center" th:text="${item.quantidade}"></td>
                         <td class="text-end">R$ <span th:text="${item.produto.valor}"></span></td>
                         <td class="text-end">R$ <span th:text="${item.subTotal()}"></span></td>
