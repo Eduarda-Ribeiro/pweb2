@@ -33,6 +33,9 @@ public class PessoaFisicaController {
         if (result.hasErrors()) {
             return new ModelAndView("pessoaFisica/formPessoaFisica");
         }
+        //Role role = roleRepository(1); //perfil ja ta salvo no banco, entao posso colocar o perfil de codigo tal para essa pessoa
+        //pessoa.usuario.getRoles().add(role) que sera salva, ja salvando um perfil para essa pessoa;
+        //criar um admin interno no import.sql
         pessoaFisicaRepository.save(pessoaFisica);
         redirectAttributes.addFlashAttribute("sucesso", "Pessoa Fisica salva com sucesso!");
         return new ModelAndView("redirect:/venda/view");

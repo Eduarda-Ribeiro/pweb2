@@ -61,7 +61,7 @@ public class VendaController {
         ItemVenda item = new ItemVenda(produto, quantidade);
         venda.getItens().add(item);
         model.addAttribute("venda", venda);
-        return new ModelAndView("venda/view", model);
+        return new ModelAndView("redirect:/venda/view", model);
     }
 
     @PostMapping("/remover")
