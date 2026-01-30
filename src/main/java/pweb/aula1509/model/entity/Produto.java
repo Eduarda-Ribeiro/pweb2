@@ -4,10 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@Scope("session")
+@Component
 @Entity
 public class Produto implements Serializable {
 
@@ -15,9 +19,19 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //pro id gerar automaticamente, autoincremento
     private Long id;
 
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+
     private String descricao;
 
     private BigDecimal valor;
+
+    private String imagem;
 
     public Long getId() {
         return id;

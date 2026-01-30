@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main})}">
+<html th:replace="~{fragments/layout :: layout(~{::head}, ~{::main})}" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="~{fragments/head :: head(~{}, ~{::title})}">
     <title>Carrinho de Compras</title>
 </head>
 <body>
 <main class="container mt-4">
+
+    <h2>Olá <strong sec:authentication="name"></strong></h2><br>
 
     <div class="card shadow-sm">
         <div class="card-header bg-secundary text-black">
@@ -17,6 +19,7 @@
                     <thead class="table-light">
                     <tr>
                         <th>Produto</th>
+                        <th class="text-center">Descrição</th>
                         <th class="text-center">Qtd</th>
                         <th class="text-end">Preço</th>
                         <th class="text-end">Subtotal</th>
@@ -24,12 +27,18 @@
                     </tr>
                     </thead>
                     <tr th:each="item, iter : ${itens}">
-                        <td th:text="${item.produto.descricao}"></td>
+                        <td style="width: 100px;">
+                            <img th:src="@{${item.produto.imagem}}"
+                                 class="img-fluid rounded"
+                                 style="max-height: 100px;"
+                                 alt="Imagem do produto">
+                        </td>
+                        <td class="text-center" th:text="${item.produto.descricao}"></td>
                         <td class="text-center" th:text="${item.quantidade}"></td>
                         <td class="text-end">R$ <span th:text="${item.produto.valor}"></span></td>
                         <td class="text-end">R$ <span th:text="${item.subTotal()}"></span></td>
                         <td class="text-center">
-                            <form th:action="@{/carrinho/remover}" method="post" class="d-inline">
+                            <form th:action="@{/venda/remover}" method="post" class="d-inline">
                                 <input type="hidden" name="index" th:value="${iter.index}">
                                 <button class="btn btn-sm btn-danger" type="submit">
                                     <i class="bi bi-trash"></i> Remover
@@ -53,9 +62,9 @@
 
             <hr>
 
-            <form th:action="@{/carrinho/finalizar}" method="post" class="mt-4">
+            <form th:action="@{/venda/finalizar}" method="post" class="mt-4">
                 <label for="cliente" class="form-label fw-bold">Selecione o Cliente:</label>
-                <select name="clienteId" id="cliente" class="form-control" required>
+                <select name="clienteId" id="cliente" class="form-control">
                     <option value="">-- Escolha --</option>
                     <option th:each="c : ${clientes}"
                             th:value="${c.id}"

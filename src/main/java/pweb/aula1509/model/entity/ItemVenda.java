@@ -1,12 +1,16 @@
 package pweb.aula1509.model.entity;
 
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Scope("session")
+@Component
 @Entity
 public class ItemVenda implements Serializable {
 

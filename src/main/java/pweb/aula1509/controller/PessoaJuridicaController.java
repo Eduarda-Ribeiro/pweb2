@@ -35,6 +35,6 @@ public class PessoaJuridicaController {
         }
         pessoaJuridicaRepository.save(pessoaJuridica);
         redirectAttributes.addFlashAttribute("sucesso", "Pessoa Juridica salva com sucesso!");
-        return new ModelAndView("redirect:/venda/list");
+        return new ModelAndView("redirect:/venda/view");
     }
 }
