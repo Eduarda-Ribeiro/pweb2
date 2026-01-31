@@ -21,13 +21,23 @@
                     <div class="text-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></div>
                 </div>
                 <div class="col-md-6">
-                    <!--<label class="form-label">Telefone</label>-->
                     <input class="form-control" type="text" th:field="*{telefone}" placeholder="Telefone">
                 </div>
                 <div class="col-md-6">
                     <label class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email</label>
                     <input class="form-control" type="text" th:field="*{email}" th:errorclass="is-invalid" placeholder="Email">
                     <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                </div><br>
+                <h4 class="mb-4">Dados de Acesso</h4>
+                <div class="col-md-6">
+                    <label class="invalid-feedback" th:if="${#fields.hasErrors('usuario.username')}" th:errors="*{usuario.username}">Login</label>
+                    <input class="form-control" type="text" th:field="*{usuario.username}" th:errorclass="is-invalid" placeholder="Login">
+                    <div class="text-danger" th:if="${#fields.hasErrors('usuario.username')}" th:errors="*{usuario.username}"></div>
+                </div>
+                <div class="col-md-6">
+                    <label class="invalid-feedback" th:if="${#fields.hasErrors('usuario.password')}" th:errors="*{usuario.password}">Password</label>
+                    <input class="form-control" type="text" th:field="*{usuario.password}" th:errorclass="is-invalid" placeholder="Password">
+                    <div class="text-danger" th:if="${#fields.hasErrors('usuario.password')}" th:errors="*{usuario.password}"></div>
                 </div>
                 <div class="col-12 mt-3">
                     <button class="btn btn-outline-secondary w-100" type="submit">Salvar</button>

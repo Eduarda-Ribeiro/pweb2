@@ -26,3 +26,12 @@ insert into item_venda ( quantidade, venda_id, produto_id) values (1, 3, 1);
 insert into item_venda ( quantidade, venda_id, produto_id) values (2, 3, 2);
 insert into item_venda ( quantidade, venda_id, produto_id) values (3, 3, 3);
 insert into item_venda ( quantidade, venda_id, produto_id) values (1, 4, 1);
+
+insert into usuario (username, password) values ('duda', '$2a$10$rqFX.BQbplN6wD3qoMqVFOljgp8LMr7mCM0KbeieqjLJ9MvIQ2cwW');
+insert into usuario (username, password) values ('da_casa', '$2a$10$.oeVTUtIUBmfw6CTTGfAweFnD9KLS6oZnl./bifQ1Vm77R423PpRC');
+
+insert into role (perfil) values ('ROLE_ADMIN');
+insert into role (perfil) values ('ROLE_USER');
+
+insert into usuario_roles (usuarios_id, roles_id) values (1, 1);
+insert into usuario_roles (usuarios_id, roles_id) values (2, 2);

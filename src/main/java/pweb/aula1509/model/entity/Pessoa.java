@@ -21,6 +21,9 @@ public abstract class Pessoa implements Serializable {
     private String email;
     private String telefone;
 
+    @OneToOne
+    private Usuario usuario;
+
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Venda> vendas = new ArrayList<>();
 
@@ -59,4 +62,12 @@ public abstract class Pessoa implements Serializable {
     }
 
     public abstract String getTipo();
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

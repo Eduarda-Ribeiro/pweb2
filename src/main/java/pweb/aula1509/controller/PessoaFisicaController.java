@@ -3,16 +3,23 @@ package pweb.aula1509.controller;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pweb.aula1509.model.entity.PessoaFisica;
+import pweb.aula1509.model.entity.Usuario;
+import pweb.aula1509.model.entity.Role;
 import pweb.aula1509.model.repository.PessoaFisicaRepository;
+import pweb.aula1509.model.repository.RoleRepository;
+import pweb.aula1509.model.repository.UsuarioRepository;
+
 
 @Controller
 @Transactional
@@ -21,10 +28,16 @@ public class PessoaFisicaController {
 
     @Autowired
     private PessoaFisicaRepository pessoaFisicaRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @GetMapping("/formPessoaFisica")
     public ModelAndView formPessoaFisica(ModelMap model) {
-        model.addAttribute("pessoaFisica", new PessoaFisica());
+        PessoaFisica pessoaFisica = new PessoaFisica();
+        pessoaFisica.setUsuario(new Usuario());
+        model.addAttribute("pessoaFisica", pessoaFisica);
         return new ModelAndView("pessoaFisica/formPessoaFisica");
     }
 
@@ -33,11 +46,20 @@ public class PessoaFisicaController {
         if (result.hasErrors()) {
             return new ModelAndView("pessoaFisica/formPessoaFisica");
         }
-        //Role role = roleRepository(1); //perfil ja ta salvo no banco, entao posso colocar o perfil de codigo tal para essa pessoa
-        //pessoa.usuario.getRoles().add(role) que sera salva, ja salvando um perfil para essa pessoa;
-        //criar um admin interno no import.sql
+
+        Usuario usuario = pessoaFisica.getUsuario();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        usuario.setPassword(encoder.encode(usuario.getPassword()));
+
+        Role role = roleRepository.buscarPerfil("ROLE_USER");
+        usuario.addRole(role);
+        usuarioRepository.salvarUsuario(usuario);
+
+        pessoaFisica.setUsuario(usuario);
+        usuario.setPessoa(pessoaFisica);
+
         pessoaFisicaRepository.save(pessoaFisica);
         redirectAttributes.addFlashAttribute("sucesso", "Pessoa Fisica salva com sucesso!");
-        return new ModelAndView("redirect:/venda/view");
+        return new ModelAndView("redirect:/login");
     }
 }

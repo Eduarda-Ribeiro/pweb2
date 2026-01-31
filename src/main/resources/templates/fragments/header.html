@@ -15,14 +15,14 @@
                         <a class="nav-link" th:href="@{/venda/view}">Home</a>
                     </li>
                     <!-- Formulários -->
-                    <li class="nav-item dropdown" >
+                    <li sec:authorize="hasAnyRole('ADMIN')" class="nav-item dropdown" >
                         <a class="nav-link dropdown-toggle" href="#" id="formsDropdown"
                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Formulários
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="formsDropdown">
-                            <li  ><a class="dropdown-item" th:href="@{/pessoaFisica/formPessoaFisica}">Pessoa Física</a></li>
-                            <li  ><a class="dropdown-item" th:href="@{/pessoaJuridica/formPessoaJuridica}">Pessoa Jurídica</a></li>
+                            <li><a class="dropdown-item" th:href="@{/pessoaFisica/formPessoaFisica}">Pessoa Física</a></li>
+                            <li><a class="dropdown-item" th:href="@{/pessoaJuridica/formPessoaJuridica}">Pessoa Jurídica</a></li>
                         </ul>
                     </li>
                     <!-- Listas -->
