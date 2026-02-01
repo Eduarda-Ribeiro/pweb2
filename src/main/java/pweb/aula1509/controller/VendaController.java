@@ -5,18 +5,20 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pweb.aula1509.model.entity.ItemVenda;
-import pweb.aula1509.model.entity.Pessoa;
-import pweb.aula1509.model.entity.Produto;
-import pweb.aula1509.model.entity.Venda;
+import pweb.aula1509.model.entity.*;
 import pweb.aula1509.model.repository.ClienteRepository;
 import pweb.aula1509.model.repository.ProdutoRepository;
+import pweb.aula1509.model.repository.UsuarioRepository;
 import pweb.aula1509.model.repository.VendaRepository;
 
 import java.time.LocalDateTime;
@@ -35,6 +37,8 @@ public class VendaController {
     private ProdutoRepository produtoRepository;
     @Autowired
     private ClienteRepository clienteRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     Venda venda;
@@ -108,6 +112,20 @@ public class VendaController {
         vendaRepository.salvar(v);
         venda.getItens().clear();
         return new ModelAndView("venda/view");
+    }
+
+    @GetMapping("/comprasUsuario")
+    public ModelAndView comprasUsuario(ModelMap model, @AuthenticationPrincipal UserDetails user) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
+
+        String username  = user.getUsername();
+        Usuario usuario = usuarioRepository.buscarUsuarioLogin(username);
+        Pessoa pessoa = usuario.getPessoa();
+        List<Venda> vendas = pessoa.getVendas();
+        model.addAttribute("lista_vendas_bd", vendas);
+        return new ModelAndView("venda/comprasUsuario", model);
     }
 
 }

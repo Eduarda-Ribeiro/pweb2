@@ -9,7 +9,7 @@
     <div class="card shadow-sm mb-4">
         <div class="card-body">
             <h4 class="mb-3">Filtrar Vendas</h4>
-            <form th:action="@{/venda/list}" method="get" class="row g-3">
+            <form th:action="@{/venda/comprasUsuario}" method="get" class="row g-3">
                 <div class="col-md-6">
                     <label class="form-label">Data da Venda:</label>
                     <input class="form-control" type="datetime-local" name="data" th:value="${param.data}">
@@ -30,30 +30,21 @@
                     <th>Id</th>
                     <th>Data</th>
                     <th>Total</th>
-                    <th>Cliente</th>
-                    <th>ID Cliente</th>
-                    <th>Detalhes</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="v : ${lista_vendas_bd}">
-                    <td th:text="${v.id}"></td>
-                    <td th:text="${#temporals.format(v.data, 'dd/MM/yyyy HH:mm')}"></td>
+                <tr th:each="vendas : ${lista_vendas_bd}">
+                    <td th:text="${vendas.id}"></td>
+                    <td th:text="${#temporals.format(vendas.data, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td>R$ <span th:text="${vendas.total()}"></span></td>
                     <td>
-                        R$ <span th:text="${v.total()}"></span>
-                    </td>
-                    <td th:text="${v.cliente.getNome()}"></td>
-                    <td th:text="${v.cliente.id}"></td>
-                    <td>
-                        <a th:href="@{/venda/detail/{id}(id=${v.id})}" class="btn btn-outline-secondary btn-sm">Detalhar</a>
+                        <a th:href="@{/venda/detail/{id}(id=${vendas.id})}" class="btn btn-outline-secondary btn-sm">Detalhar</a>
                     </td>
                 </tr>
                 </tbody>
             </table>
-
         </div>
     </div>
-
 </main>
 </body>
 </html>

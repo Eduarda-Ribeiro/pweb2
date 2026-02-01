@@ -35,7 +35,7 @@
                             <li ><a class="dropdown-item" th:href="@{/produtos/list}">Produtos</a></li>
                             <li sec:authorize="hasAnyRole('ADMIN')"><a class="dropdown-item" th:href="@{/clientes/list}">Clientes</a></li>
                             <li sec:authorize="hasAnyRole('ADMIN')"><a class="dropdown-item" th:href="@{/venda/list}">Vendas</a></li>
-                            <li sec:authorize="hasAnyRole('USER')"><a class="dropdown-item" th:href="@{/}">Vendas</a></li>
+                            <li sec:authorize="hasAnyRole('USER')"><a class="dropdown-item" th:href="@{/venda/comprasUsuario}">Vendas</a></li>
                         </ul>
                     </li>
                     <!-- Carrinho -->
