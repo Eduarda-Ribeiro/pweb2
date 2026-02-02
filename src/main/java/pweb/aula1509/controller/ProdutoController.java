@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pweb.aula1509.model.entity.ItemVenda;
+import pweb.aula1509.model.entity.Venda;
 import pweb.aula1509.model.repository.ProdutoRepository;
 
 import java.util.List;
@@ -21,6 +22,8 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+    @Autowired
+    private Venda venda;
 
     @GetMapping("/list")
     public ModelAndView list(@RequestParam(required = false) String descricao, ModelMap model) {
@@ -28,6 +31,7 @@ public class ProdutoController {
             model.addAttribute("lista_produtos_bd", produtoRepository.buscarProdutoPorNome(descricao));
         } else {
             model.addAttribute("lista_produtos_bd", produtoRepository.produtos());
+            model.addAttribute("quantidade_produtos", venda.getItens().size());
         }
         return new ModelAndView("produtos/list");
     }
