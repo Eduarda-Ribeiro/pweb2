@@ -25,6 +25,9 @@
                             <li><a class="dropdown-item" th:href="@{/pessoaJuridica/formPessoaJuridica}">Pessoa Jurídica</a></li>
                         </ul>
                     </li>
+                    <li sec:authorize="hasAnyRole('ADMIN')" class="nav-item dropdown" >
+                        <a th:href="@{/pessoaFisica/meuCadastro}" class="btn btn-outline-secondary">Meu Cadastro</a>
+                    </li>
                     <!-- Listas -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="listasDropdown"

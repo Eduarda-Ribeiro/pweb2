@@ -21,7 +21,7 @@ public abstract class Pessoa implements Serializable {
     private String email;
     private String telefone;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)

@@ -24,4 +24,12 @@ public class PessoaJuridicaRepository {
         query.setParameter("nome", nome.toLowerCase());
         return query.getResultList();
     }
+
+    public void update(PessoaJuridica pessoaJuridica){
+        em.merge(pessoaJuridica);
+    }
+
+    public PessoaJuridica buscarPorId(Long id){
+        return em.find(PessoaJuridica.class, id);
+    }
 }

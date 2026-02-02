@@ -25,4 +25,12 @@ public class PessoaFisicaRepository {
         return query.getResultList();
     }
 
+    public void update(PessoaFisica pessoaFisica){
+        em.merge(pessoaFisica);
+    }
+
+    public PessoaFisica buscarPorId(Long id){
+        return em.find(PessoaFisica.class, id);
+    }
+
 }

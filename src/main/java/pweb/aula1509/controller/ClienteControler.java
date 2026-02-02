@@ -33,13 +33,6 @@ public class ClienteControler {
     @Autowired
     private PessoaJuridicaRepository pessoaJuridicaRepository;
 
-    /*@GetMapping("/list")
-    public ModelAndView listarClientes(ModelMap model){
-        List<Pessoa> clientes = clienteRepository.listarTodosCliente();
-        model.addAttribute("lista_clientes_bd", clientes);
-        return new ModelAndView("clientes/list", model);
-    }*/
-
     @GetMapping("/list")
     public ModelAndView listarClientes(@RequestParam(required = false) String nome) {
 

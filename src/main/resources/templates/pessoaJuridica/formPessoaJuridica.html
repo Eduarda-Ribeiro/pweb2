@@ -8,7 +8,8 @@
         <div class="card shadow-sm">
             <div class="card-body">
                 <h3 class="mb-4">Cadastro de Pessoa Jurídica</h3>
-                <form class="row g-3" th:action="@{/pessoaJuridica/save}" th:object="${pessoaJuridica}" method="post">
+                <form class="row g-3" th:action="${pessoaJuridica.id == null} ? @{/pessoaJuridica/save} : @{/pessoaJuridica/update}"
+                      th:object="${pessoaJuridica}" method="post">
                     <input type="hidden" th:field="*{id}">
                     <div class="col-md-6">
                         <label class="invalid-feedback" th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}">Razão Social</label>
